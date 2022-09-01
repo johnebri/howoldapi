@@ -1,0 +1,17 @@
+resilience4j.ratelimiter:
+  instances:
+    how_old_api:
+      limitForPeriod: 5
+      limitRefreshPeriod: 10s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
