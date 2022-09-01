@@ -1,8 +1,8 @@
 {
-    "name": "",
+    "name": "John Ebri",
     "track": "backend",
-    "email": "",
-    "githubUsername": "",
-    "deployedAppURL": "",
-    "explainer": ""
+    "email": "john.ebri@yahoo.com",
+    "githubUsername": "johnebri",
+    "deployedAppURL": "https://je-howoldapi.herokuapp.com",
+    "explainer": "Simple API to calculate and return the age of a person, given their date of birth."
 }
