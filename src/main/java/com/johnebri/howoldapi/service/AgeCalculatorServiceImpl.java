@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 public class AgeCalculatorServiceImpl implements AgeCalculatorService {
 
     @Override
-    public Long getAge(String dob) {
+    public Long getAge(String dob) throws Exception {
 
         LocalDateTime now = LocalDateTime.now();
         String dobStr = dob;
@@ -22,8 +22,12 @@ public class AgeCalculatorServiceImpl implements AgeCalculatorService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dobDate = LocalDateTime.parse(dobStr, formatter);
 
-        Long diff = ChronoUnit.YEARS.between(dobDate, now);
+        Long secondsDiff = ChronoUnit.SECONDS.between(dobDate, now);
+        if(secondsDiff < 0) {
+            throw new Exception("Date of birth should not be greater than current date/time");
+        }
 
+        Long diff = ChronoUnit.YEARS.between(dobDate, now);
         return diff;
     }
 }

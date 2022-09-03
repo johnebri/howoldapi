@@ -25,19 +25,12 @@ public class AgeCalculationController {
     }
 
     @GetMapping("/howold")
-    @RateLimiter(name="how_old_api", fallbackMethod = "rateLimiterFallback")
-    public ResponseEntity<BaseResponse> howOld(@RequestParam String dob) {
+    @RateLimiter(name="how_old_api")
+    public ResponseEntity<BaseResponse> howOld(@RequestParam String dob) throws Exception {
         Long age = ageCalculator.getAge(dob);
         BaseResponse br = new BaseResponse();
         br.setSuccess(true);
-        br.setResponseMessage("You are " +  age + " years old");
+        br.setResponseMessage("You are " + age + " years old");
         return new ResponseEntity<>(br, HttpStatus.OK);
-    }
-
-    public ResponseEntity<BaseResponse> rateLimiterFallback(Exception e) {
-        BaseResponse br = new BaseResponse();
-        br.setSuccess(false);
-        br.setResponseMessage("The service does not permit further calls");
-        return new ResponseEntity<>(br, HttpStatus.TOO_MANY_REQUESTS);
     }
 }
