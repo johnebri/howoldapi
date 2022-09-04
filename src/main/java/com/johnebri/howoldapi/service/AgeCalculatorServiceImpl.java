@@ -22,6 +22,7 @@ public class AgeCalculatorServiceImpl implements AgeCalculatorService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dobDate = LocalDateTime.parse(dobStr, formatter);
 
+        // check if the date of birth is greater than the current date and time
         Long secondsDiff = ChronoUnit.SECONDS.between(dobDate, now);
         if(secondsDiff < 0) {
             throw new Exception("Date of birth should not be greater than current date/time");

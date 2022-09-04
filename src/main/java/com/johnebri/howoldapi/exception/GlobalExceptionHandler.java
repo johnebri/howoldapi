@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
         BaseResponse br = new BaseResponse();
         br.setSuccess(false);
         br.setResponseMessage("Invalid timestamp format. Please specify date of birth in this format: yyyy-mm-dd HH:mm:ss. Example 1991-12-19 11:11:11");
-        return new ResponseEntity<>(br, HttpStatus.TOO_MANY_REQUESTS);
+        return new ResponseEntity<>(br, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
