@@ -2,13 +2,10 @@ package com.johnebri.howoldapi.exception;
 
 import com.johnebri.howoldapi.dto.BaseResponse;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -16,7 +13,6 @@ import java.time.format.DateTimeParseException;
  */
 
 @ControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RequestNotPermitted.class)
