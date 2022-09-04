@@ -1,5 +1,6 @@
 package com.johnebri.howoldapi.service;
 
+import com.johnebri.howoldapi.exception.IncorrectDateException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class AgeCalculatorServiceImpl implements AgeCalculatorService {
         // check if the date of birth is greater than the current date and time
         Long secondsDiff = ChronoUnit.SECONDS.between(dobDate, now);
         if(secondsDiff < 0) {
-            throw new Exception("Date of birth should not be greater than current date/time");
+            throw new IncorrectDateException("Date of birth should not be greater than current date/time");
         }
 
         Long diff = ChronoUnit.YEARS.between(dobDate, now);

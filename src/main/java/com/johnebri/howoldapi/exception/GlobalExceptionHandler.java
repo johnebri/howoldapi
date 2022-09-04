@@ -35,6 +35,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(br, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IncorrectDateException.class)
+    public ResponseEntity<BaseResponse> handleUndefinedExceptions(IncorrectDateException ex) {
+        BaseResponse br = new BaseResponse();
+        br.setSuccess(false);
+        br.setResponseMessage(ex.getMessage());
+        return new ResponseEntity<>(br, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseResponse> handleUndefinedExceptions(Exception ex) {
         BaseResponse br = new BaseResponse();
