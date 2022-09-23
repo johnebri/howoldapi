@@ -1,14 +1,17 @@
 package com.johnebri.howoldapi.controller;
 
 import com.johnebri.howoldapi.dto.BaseResponse;
+import com.johnebri.howoldapi.model.Calls;
+import com.johnebri.howoldapi.repository.CallsRepository;
 import com.johnebri.howoldapi.service.AgeCalculatorService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by John on 30/08/2022
@@ -25,9 +28,8 @@ public class AgeCalculationController {
     }
 
     @GetMapping("/howold")
-    @RateLimiter(name="how_old_api")
-    public ResponseEntity<BaseResponse> howOld(@RequestParam String dob) throws Exception {
-        Long age = ageCalculator.getAge(dob);
+    public ResponseEntity<BaseResponse> howOld(@RequestParam String dob, HttpServletRequest request) throws Exception {
+        Long age = ageCalculator.getAge(dob, request);
         BaseResponse br = new BaseResponse();
         br.setSuccess(true);
         br.setResponseMessage("You are " + age + " years old");

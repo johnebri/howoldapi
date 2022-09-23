@@ -1,8 +1,12 @@
 package com.johnebri.howoldapi.service;
 
 import com.johnebri.howoldapi.exception.IncorrectDateException;
+import com.johnebri.howoldapi.model.Calls;
+import com.johnebri.howoldapi.repository.CallsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -14,8 +18,13 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class AgeCalculatorServiceImpl implements AgeCalculatorService {
 
+    @Autowired
+    private RateLimitService rateLimitService;
+
     @Override
-    public Long getAge(String dob) throws Exception {
+    public Long getAge(String dob, HttpServletRequest request) throws Exception {
+
+        rateLimitService.interceptCall(request);
 
         LocalDateTime now = LocalDateTime.now();
         String dobStr = dob;
